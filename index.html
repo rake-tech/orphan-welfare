@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orphanage Care Network</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="bg-overlay"></div>
+
+    <div class="container">
+
+        <section id="home-view" class="view">
+            <div class="hero-content">
+                <h1>Orphanage Care Network</h1>
+                <p>Helping the homeless and needy find a future.</p>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="showLogin()">Volunteer Login</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="login-view" class="view hidden">
+            <div class="form-wrapper">
+                <h2>Volunteer Access</h2>
+                <p style="font-size:0.9rem; color:#666;">Enter your details to find local orphanages.</p>
+                <form id="login-form" class="compact-form">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" id="login-name" required placeholder="Full Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Your Mobile Number</label>
+                        <input type="tel" id="login-contact" required placeholder="e.g. 9876543210">
+                    </div>
+                    <div class="form-group">
+                        <label>Current City</label>
+                        <input type="text" id="login-area" required placeholder="e.g. Vijayawada, Hyderabad">
+                    </div>
+                    <button type="submit" class="btn-primary">Enter Dashboard</button>
+                    <button type="button" class="btn-text" onclick="showHome()">Back</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="dashboard-view" class="view hidden">
+            <header class="dash-header">
+                <div>
+                    <h3>Welcome, <span id="user-display-name">User</span></h3>
+                    <small>📍 <span id="user-display-area">Location</span></small>
+                </div>
+                <div class="controls">
+                    <label class="switch-label">
+                        <input type="checkbox" id="admin-toggle" onchange="toggleAdminMode()">
+                        Admin Mode
+                    </label>
+                    <button class="btn-small" onclick="logout()">Logout</button>
+                </div>
+            </header>
+
+            <div id="recommendation-box" class="recommendation-box hidden">
+                </div>
+
+            <div class="dashboard-grid">
+                
+                <div class="card">
+                    <h3>1. Report Care Needed</h3>
+                    <p class="subtitle">Upload photo of person in need.</p>
+                    
+                    <form id="care-form" class="compact-form">
+                        <div class="upload-container">
+                            <input type="file" id="care-photo" accept="image/*" required>
+                            <div class="upload-visual" id="upload-visual">
+                                <span class="icon">📷</span>
+                                <span id="upload-text">Tap to Upload Photo</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <input type="number" id="care-age" placeholder="Approx Age" required>
+                            <input type="text" id="care-location" placeholder="Location Found" required>
+                        </div>
+                        
+                        <select id="care-category">
+                            <option value="Homeless Child">Homeless Child</option>
+                            <option value="Old Age Person">Old Age Person</option>
+                        </select>
+                        
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="care-need" value="Food"> Food</label>
+                            <label><input type="checkbox" name="care-need" value="Shelter"> Shelter</label>
+                            <label><input type="checkbox" name="care-need" value="Medical"> Medical</label>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">Submit Record</button>
+                    </form>
+
+                    <h4>Recent Reports</h4>
+                    <div class="table-container">
+                        <table id="care-table">
+                            <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>Victim Details</th>
+                                    <th>Reported By</th>
+                                    <th>Status</th>
+                                    <th class="admin-col hidden">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>2. Service Enquiry</h3>
+                    
+                    <form id="service-form" class="compact-form">
+                        <label class="input-label">Select Orphanage:</label>
+                        
+                        <select id="target-orphanage" onchange="checkManualInput(this)" required>
+                            <option value="">-- Choose Orphanage --</option>
+                            </select>
+
+                        <input type="text" id="manual-orphanage-input" class="hidden" placeholder="Type Orphanage Name manually...">
+
+                        <select id="service-type">
+                            <option value="Food Distribution">Food Distribution</option>
+                            <option value="Medical Camp">Medical Camp</option>
+                            <option value="Donation Visit">Donation Visit</option>
+                        </select>
+                        
+                        <div class="row">
+                            <input type="date" id="service-date" required>
+                            <input type="time" id="service-time" required>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">Book Slot</button>
+                    </form>
+
+                    <h4>My Bookings</h4>
+                    <div class="table-container">
+                        <table id="service-table">
+                            <thead>
+                                <tr>
+                                    <th>Orphanage</th>
+                                    <th>Service & Time</th>
+                                    <th>Status</th>
+                                    <th class="admin-col hidden">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
